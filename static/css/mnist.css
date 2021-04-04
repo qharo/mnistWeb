@@ -1,0 +1,18 @@
+#gameWin{
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    grid-template-rows: 10% 80% 10%;
+}
+
+#inputPad{
+    grid-row: 2/3;
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns: repeat(28, 3.6%);
+    grid-template-rows: repeat(28, 3.6%);
+}
+
+#inputPad > button{
+    outline: none;
+    text-decoration: none;
+}
