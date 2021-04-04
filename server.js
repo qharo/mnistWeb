@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require('path')
 const bodyParser = require('body-parser')
+const fs = require('fs')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,6 +22,14 @@ app.get("/", (req, res) => {
 app.post("/predict/:data", urlEncPar, (req, res) => {
     const tfInput = deco(req.params.data)
     res.send("4")
+})
+
+app.get('/model', (req, res) => {
+    //let modPath = path.join(path.join(__dirname, 'mnist'), 'model.json')
+    let rawdata = fs.readFileSync('mnist_tfjs/model.json')
+    let mod = JSON.parse(rawdata)
+    res.json(mod)
+    console.log("done")
 })
 
 statPath = path.join(__dirname, 'static')
