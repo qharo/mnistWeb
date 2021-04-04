@@ -28,7 +28,7 @@ app.get('/model', (req, res) => {
     //let modPath = path.join(path.join(__dirname, 'mnist'), 'model.json')
     let rawdata = fs.readFileSync('mnist_tfjs/model.json')
     let mod = JSON.parse(rawdata)
-    res.json(mod)
+    res.json(rawdata)
     console.log("done")
 })
 
