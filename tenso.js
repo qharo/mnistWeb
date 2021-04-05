@@ -1,16 +1,22 @@
 const tf = require('@tensorflow/tfjs');
-//require('@tensorflow/tfjs-node');
+require('@tensorflow/tfjs-node');
 const path = require('path')
 
-async function createModel(){
-    modPath = path.join(path.join(__dirname, 'mnist'), 'model.json')
-    console.log(modPath)
-    const model = await tf.loadLayersModel('https://classic-mnist-web.herokuapp.com/model')
-    console.log("model made")
-    //    const model = tf.Sequential()
-//    model.add(tf.layers.conv2d())
+class tens{
+    constructor(blocks){
+        this.blocks = blocks
+    }
+
+    async predict(){
+        this.model = await tf.loadLayersModel('file://mnist_tfjs/model.json')
+        let inp = tf.tensor2d(this.blocks, [28,28])
+        inp = inp.reshape([1, 28, 28, 1])
+        let output = this.model.predict(inp).dataSync()
+        let maxV = output.reduce(function(a, b) {
+            return Math.max(a, b);
+        });
+        return output.indexOf(maxV)
+    }
 }
 
-createModel().then(() => {
-    console.log('done')
-})
+module.exports = {tens}
